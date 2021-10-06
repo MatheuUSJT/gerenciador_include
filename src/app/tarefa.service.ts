@@ -3,6 +3,7 @@ import {HttpClient, HttpRequest} from '@angular/common/http';
 import { Tarefa } from './model/tarefa';
 import {Subject} from 'rxjs';
 import { Total } from './model/total';
+import { Filme } from './model/filme';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class TarefaService {
 
   private baseUrl: string = 'http://localhost:3000/tarefas';
   private baseUrlTotal: string = 'http://localhost:3000/tarefas/total';
+
 
   private colecaoAtualizada = new Subject<Tarefa[]>();
   private listaTotal = new Subject<Total[]>();

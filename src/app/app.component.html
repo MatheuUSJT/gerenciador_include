@@ -1,41 +1,59 @@
 <main>
     <p-tabView (onChange)="atualizarData(); atualizarTotal()">
 
+      <!-- <app-login></app-login> -->
+
       <p-tabPanel header="Cadastro">
         <p-card header="Gastos" subheader="Seus gastos">
 
-          <form #tarefaForm="ngForm" (ngSubmit)="adicionar(tarefaForm)">
+          <form #filmeForm="ngForm" (ngSubmit)="adicionar(filmeForm)">
             <span class="p-float-label">
-              <input type="text" id="float-input-tarefa" pInputText name="tarefa" ngModel>
-              <label for="float-input-tarefa">Item</label>
+              <input type="text" id="float-input-tarefa" pInputText name="titulo" ngModel>
+              <label for="float-input-tarefa">Titulo</label>
             </span>
 
             <span class="p-float-label">
-              <input type="number" id="float-input-tarefa" pInputText name="valor" ngModel>
-              <label for="float-input-tarefa">Valor</label>
+              <input type="date" id="float-input-tarefa" pInputText name="data_lancamento" ngModel>
+              <label for="float-input-tarefa">Data de Lancamento</label>
             </span>
+
+            <span class="p-float-label">
+              <input type="number" id="float-input-tarefa" pInputText name="origem_uf" ngModel>
+              <label for="float-input-tarefa">Origem UF</label>
+            </span>
+
+            <span class="p-float-label">
+              <input type="text" id="float-input-tarefa" pInputText name="sinopse" ngModel>
+              <label for="float-input-tarefa">Sinopse</label>
+            </span>
+
+            <span class="p-float-label">
+              <input type="number" id="float-input-tarefa" pInputText name="genero" ngModel>
+              <label for="float-input-tarefa">Genero</label>
+            </span>
+
 
             <div class="adicionar-botao">
               <p-button label="Adicionar" type="submit" icon="pi pi-check"></p-button>
             </div>
           </form>
 
-          <div class="tarefa" *ngFor="let tarefa of tarefas">
-            <p-card header="{{tarefa.descricao}} - R${{tarefa.valor}}">
-
+          <div class="tarefa" *ngFor="let filme of filmes">
+            <p-card header="{{filme.titulo}} - {{filme.sinopse}}">
+              <img [src]="'assets/img/velozes_e_furiosos.jpg'" style="width:300px; height: 500px;" alt="image">
               <div class="conteudo-tarefa">
                 <div class="done">
-                  <p-selectButton [options]="opcoes" optionLabel="rotulo"
+                  <!--<p-selectButton [options]="opcoes" optionLabel="rotulo"
                   optionValue="valor" [(ngModel)]="tarefa.finalizada"
                   (onChange)="atualizar(tarefa)">
-                  </p-selectButton>
+                  </p-selectButton>-->
                 </div>
 
               </div>
 
               <ng-template pTemplate="footer">
 
-              <p-button class="btn-excluir" (onClick)="excluir(tarefa)" icon="pi pi-times"></p-button>
+              <!--<p-button class="btn-excluir" (onClick)="excluir(tarefa)" icon="pi pi-times"></p-button>-->
 
             </ng-template>
 
@@ -44,6 +62,10 @@
 
         </p-card>
       </p-tabPanel>
+
+
+
+
 
       <p-tabPanel header="Receita">
 

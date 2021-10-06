@@ -12,10 +12,12 @@ import {ChartModule} from 'primeng/chart';
 import {OrderListModule} from 'primeng/orderlist';
 import {HttpClientModule} from '@angular/common/http';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

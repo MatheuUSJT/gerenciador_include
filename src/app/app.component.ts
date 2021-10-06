@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Filme } from './model/filme';
 import { Tarefa } from './model/tarefa';
 import { Total } from './model/total';
 import { TarefaService } from './tarefa.service'
+import { FilmeService } from './filme.service';
 
 
 @Component({
@@ -14,16 +16,23 @@ export class AppComponent implements OnInit {
   tarefas: Tarefa[] = [];
 
   receita: Tarefa[] = [];
+  filmes: Filme[] = [];
+
+
   listaTotal: Total[] = [];
   total: number = 0;
   data: any;
 
-  constructor(private tarefaService: TarefaService){
-
-  }
+  //constructor(private tarefaService: TarefaService){}
+  constructor(private filmeService: FilmeService){}
 
   ngOnInit(){
-    this.tarefaService.getColecaoAtualizada().subscribe(tarefas =>{
+    this.filmeService.getColecaoAtualizada().subscribe(filmes =>{
+      this.filmes = filmes;
+    });
+    this.filmeService.list();
+
+    /*this.tarefaService.getColecaoAtualizada().subscribe(tarefas =>{
       this.tarefas = tarefas;
     });
     this.tarefaService.list();
@@ -31,11 +40,11 @@ export class AppComponent implements OnInit {
     this.tarefaService.getTotalAtualizado().subscribe(listaTotal=>{
       this.listaTotal = listaTotal;
     });
-    this.tarefaService.total();
+    this.tarefaService.total();*/
   }
 
   atualizarTotal() {
-    this.tarefaService.getTotalAtualizado().subscribe(listaTotal=>{
+    /*this.tarefaService.getTotalAtualizado().subscribe(listaTotal=>{
       this.listaTotal = listaTotal;
     });
     this.tarefaService.total();
@@ -43,7 +52,7 @@ export class AppComponent implements OnInit {
     for (let i = 0; i < this.listaTotal.length; i++){
         let aux = this.listaTotal[i];
         this.total = this.total + Number(aux.valor);
-    }
+    }*/
   }
 
 
@@ -68,28 +77,31 @@ export class AppComponent implements OnInit {
     console.log(this.tarefas);
   }
 
-  adicionar(tarefaForm: any){
-    const newId = this.tarefas.length + 1;
-    const t: Tarefa = {
-      id: newId,
-      descricao: tarefaForm.value.tarefa,
-      valor: tarefaForm.value.valor,
-      finalizada: false
-    }
+  adicionar(filmeForm: any){
+    //const newId = this.tarefas.length + 1;
+
+    const f: Filme = {
+
+      titulo: filmeForm.value.titulo,
+      data_lancamento: filmeForm.value.data_lancamento,
+      origem_uf: filmeForm.value.origem_uf,
+      sinopse: filmeForm.value.sinopse,
+      genero: filmeForm.value.genero,
+      }
 
     //this.tarefas.push(t);
-    this.tarefaService.add(t);
+    this.filmeService.add(f);
     //this.total = this.total + tarefaForm.value.valor;
-    this.clicar();
-    tarefaForm.resetForm();
+    //this.clicar();
+    filmeForm.resetForm();
   }
 
   atualizar (tarefa: Tarefa){
-    this.tarefaService.update(tarefa);
+    //AQUI  this.tarefaService.update(tarefa);
   }
 
   excluir(tarefa: Tarefa){
-    this.tarefaService.delete(tarefa);
+    //AQUI  this.tarefaService.delete(tarefa);
     console.log('sim excluindo');
   }
 
@@ -97,5 +109,6 @@ export class AppComponent implements OnInit {
     {rotulo: "Concluído", valor: true},
     {rotulo: "Pedente", valor: false}
   ]
+
 
 }
